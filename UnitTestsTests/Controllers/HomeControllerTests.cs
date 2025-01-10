@@ -115,5 +115,28 @@ namespace UnitTests.Controllers.Tests
             Assert.AreEqual(EnumExtensions.GetCodeValue(ErrorCode.InvalidInputData), responseModel.ErrCode);
             Assert.AreEqual(EnumExtensions.GetDescription(ErrorCode.InvalidInputData), responseModel.ErrMsg);
         }
+
+        //03
+        [TestMethod()]
+        public void Login_ReturnsInvalidInputData()
+        {
+            // arrange
+            LoginModel request = new LoginModel("", "");
+            ResponseModel expected = new ResponseModel(ErrorCode.InvalidInputData);
+
+            _mockUserService.Setup(x => x.GetUserLogin(request)).Returns(expected);
+
+            // act
+            var result = _homeController.Login(request) as OkObjectResult;
+            ResponseModel responseModel = (ResponseModel)result.Value;
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(200, result.StatusCode);
+            Assert.IsNull(responseModel?.Data);
+
+            Assert.AreEqual(EnumExtensions.GetCodeValue(ErrorCode.InvalidInputData), responseModel.ErrCode);
+            Assert.AreEqual(EnumExtensions.GetDescription(ErrorCode.InvalidInputData), responseModel.ErrMsg);
+        }
     }
 }

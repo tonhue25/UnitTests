@@ -11,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddSingleton<Db>();
-//builder.Services.AddScoped<IDb, Db>();
+//builder.Services.AddSingleton<Db>();
+builder.Services.AddScoped<IDb, Db>();
 
 
 var app = builder.Build();

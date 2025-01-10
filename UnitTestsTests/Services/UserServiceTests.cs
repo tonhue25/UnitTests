@@ -1,8 +1,6 @@
 ﻿using Moq;
-using UnitTests.Controllers;
 using UnitTests.Enums;
 using UnitTests.Models;
-using UnitTests.Services;
 
 namespace UnitTests.Db.Tests
 {
@@ -20,7 +18,7 @@ namespace UnitTests.Db.Tests
         }
 
         [TestMethod()]
-        public void GetUserLogin_shouldReturnAcctInfo_whenRequestValid()
+        public void GetUserLogin_LoginData_ReturnsUser()
         {
             LoginModel request = new LoginModel("username", "password");
             LoginModel expectedLogin = new LoginModel("username", "password");
@@ -38,12 +36,11 @@ namespace UnitTests.Db.Tests
         }
 
         [TestMethod()]
-        public void GetUserLogin_shouldReturnNull_whenRequestValid()
+        public void GetUserLogin_LoginData_ReturnsNull()
         {
             LoginModel request = new LoginModel("username1", "password1");
-            LoginModel expected = null;
 
-            _mockDb.Setup(x => x.GetUser(request)).Returns(expected);
+            _mockDb.Setup(x => x.GetUser(request)).Returns((LoginModel)null);
 
             ResponseModel result = _userService.GetUserLogin(request);
 

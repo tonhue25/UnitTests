@@ -22,7 +22,7 @@ namespace UnitTests.Controllers.Tests
 
         // 00
         [TestMethod()]
-        public void Login_shouldReturnAcctInfo_whenAcctExist()
+        public void Login_LoginData_ReturnsOkResultWithUser()
         {
             // arrange
             LoginModel request = new LoginModel("username", "password");
@@ -36,14 +36,6 @@ namespace UnitTests.Controllers.Tests
             ResponseModel responseModel = (ResponseModel)result.Value;
 
             // assert
-            //{
-            //  "errCode": "00",
-            //  "errMsg": "Login success",
-            //  "data": {
-            //      "username": "username",
-            //      "password": "password"
-            //  }
-            //}
             Assert.IsNotNull(result);
             Assert.AreEqual(200, result.StatusCode);
             Assert.IsNotNull(responseModel?.Data);
@@ -56,7 +48,7 @@ namespace UnitTests.Controllers.Tests
 
         //01
         [TestMethod()]
-        public void Login_shouldReturnError_whenAcctNotExist()
+        public void Login_LoginData_ReturnsNotFound()
         {
             // arrange
             LoginModel request = new LoginModel("username1", "password");
@@ -70,12 +62,6 @@ namespace UnitTests.Controllers.Tests
             ResponseModel responseModel = (ResponseModel)result.Value;
 
             // assert
-            //{
-            //  "errCode": "01",
-            //  "errMsg": "Not Found",
-            //  "data": null
-            //}
-
             Assert.IsNotNull(result);
             Assert.AreEqual(200, result.StatusCode);
             
@@ -85,7 +71,7 @@ namespace UnitTests.Controllers.Tests
 
         //03
         [TestMethod()]
-        public void Login_shouldReturnError_whenUsernameInvalid()
+        public void Login_Password_ReturnsInvalidInputData()
         {
             // arrange
             LoginModel request = new LoginModel("", "password");
@@ -98,11 +84,6 @@ namespace UnitTests.Controllers.Tests
             ResponseModel responseModel = (ResponseModel)result.Value;
 
             // assert
-            //{
-            //  "errCode": "03",
-            //  "errMsg": "Invalid Input Data",
-            //  "data": null
-            //}
             Assert.IsNotNull(result);
             Assert.AreEqual(200, result.StatusCode);
 
@@ -114,7 +95,7 @@ namespace UnitTests.Controllers.Tests
 
         //03
         [TestMethod()]
-        public void Login_shouldReturnError_whenPasswordInvalid()
+        public void Login_Username_ReturnsInvalidInputData()
         {
             // arrange
             LoginModel request = new LoginModel("username", "");
@@ -127,11 +108,6 @@ namespace UnitTests.Controllers.Tests
             ResponseModel responseModel = (ResponseModel)result.Value;
 
             // assert
-            //{
-            //  "errCode": "03",
-            //  "errMsg": "Invalid Input Data",
-            //  "data": null
-            //}
             Assert.IsNotNull(result);
             Assert.AreEqual(200, result.StatusCode);
             Assert.IsNull(responseModel?.Data);
